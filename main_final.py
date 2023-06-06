@@ -69,15 +69,16 @@ def verificar_conectado(linha):
     padrao = r"\bConectado\b"
     resultado = re.search(padrao, linha)
     if resultado:
-        return True
-    else:
         return False
+    else:
+        return True
 
 #Função que retorna o tipo da conexão
 def get_network_type():
 
     # Chama a função no CMD
-    output = subprocess.check_output('netsh interface show interface | findstr "Wi-Fi"', shell=True)
+    output = subprocess.check_output('netsh interface show interface | findstr "Ethernet"', shell=True)
+
     # Decodifica a saída para uma string legível
     output = output.decode('utf-8')
 
