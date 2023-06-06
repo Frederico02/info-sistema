@@ -5,7 +5,6 @@
 
 
 
-
 import os
 import re
 import psutil
@@ -60,11 +59,12 @@ def update_data():
     domain_label.config(text=get_domain())
 
     network_type = get_network_type()
-    network_type_label.config(text='Tipo de rede: ' + network_type)
+    network_type_label.config(text='' + network_type)
 
     # Aguarda 5 minutos e chama a função update_data novamente
     root.after(300000, update_data)
 
+#Função que verifica se esta no wifi ou no cabo
 def verificar_conectado(linha):
     padrao = r"\bConectado\b"
     resultado = re.search(padrao, linha)
@@ -73,21 +73,22 @@ def verificar_conectado(linha):
     else:
         return False
 
-
+#Função que retorna o tipo da conexão
 def get_network_type():
-    # Chama o comando CMD
-    #colocar if no output
+
+    # Chama a função no CMD
     output = subprocess.check_output('netsh interface show interface | findstr "Wi-Fi"', shell=True)
+    # Decodifica a saída para uma string legível
     output = output.decode('utf-8')
-    output = output.replace(" ", "")
+
+    #Verifica se esta conectado no wi-fi ou no cabo
     if verificar_conectado(output):
         wifi = subprocess.check_output('netsh wlan show interfaces | findstr "Faixa"', shell=True)
-        # Decodifica a saída para uma string legível
         wifi = wifi.decode('utf-8')
         wifi = wifi.replace(" ", "")
         return (wifi)
     else:
-        wifi = 'Faixa Cabeada'
+        wifi = 'Faixa: Cabeada'
         return (wifi)
 
 
