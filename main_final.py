@@ -53,9 +53,9 @@ def get_domain():
 def update_data():
     # Atualiza os dados dos widgets da interface gráfica
     hostname_label.config(text='Hostname: ' + get_hostname())
-    mac_address_label.config(text='Endereço MAC: ' + get_mac_address())
-    ip_address_label.config(text='Endereço IP: ' + get_ip_address())
-    username_label.config(text='Usuário logado: ' + get_username())
+    mac_address_label.config(text='MAC: ' + get_mac_address())
+    ip_address_label.config(text='IP: ' + get_ip_address())
+    username_label.config(text='Usuário : ' + get_username())
     domain_label.config(text=get_domain())
 
     network_type = get_network_type()
@@ -89,7 +89,7 @@ def get_network_type():
         wifi = wifi.replace(" ", "")
         return (wifi)
     else:
-        wifi = 'Faixa: Cabeada'
+        wifi = 'Conexão: Cabeada'
         return (wifi)
 
 
